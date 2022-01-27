@@ -1,7 +1,7 @@
 # linkedList
 Super basic linked list. My first time writing up a data structure from scratch (list.c).  
   
-## Future commits:  
+## Current Updates:  
 * New file (linkedlist.c) includes updates and more advanced implementation of linked lists using functions and strings.  
 
 ### ***More updates coming soon to this repository:*** ###  
