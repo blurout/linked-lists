@@ -2,26 +2,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 // Definition of a node structure
 // a linked list is a data structure made up of node linked to each other
-typedef struct node
-{
+typedef struct node {
     char* name;
     struct node* next;
 }
 node;
 
 //main body of code where we will add to the list and print it out
-int main(void)
-{
+int main(void) {
     //initialization of list
     node *list = NULL;
     //initialization of first node
     node *n = malloc(sizeof(node));
     //checking if the memory that was allocated to the node is available
-    if(n == NULL)
-    {
+    if(n == NULL) {
         return 1;
     }
     //setting the node number to a number
@@ -33,8 +29,7 @@ int main(void)
     
     //initializing the next node
     n = malloc(sizeof(node));
-    if(n == NULL)
-    {
+    if(n == NULL) {
         free(list);
         return 1;
     }
@@ -45,8 +40,7 @@ int main(void)
 
     //initializing the next node
     n = malloc(sizeof(node));
-    if(n == NULL)
-    {
+    if(n == NULL) {
         free(list);
         free(n);
         return 1;
@@ -58,8 +52,7 @@ int main(void)
     //this loop intitializes a temporary node that stores each node of the list 
     //starts off at the first node which is the start of the list
     //continues untill the next node is NULL or blank
-    for(node *tmp = list;tmp != NULL;tmp = tmp->next)
-    {
+    for(node *tmp = list;tmp != NULL;tmp = tmp->next) {
         //prints current node
         printf("%i\n", tmp->name);
     }
