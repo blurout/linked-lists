@@ -6,7 +6,7 @@ typedef struct node {
     struct node* next;
 }
 node;
-
+//fixed var and func names
 node* appendNode(node *list, char* data);
 node* allocNode(node *list);
 node* insertNodeBefore(node *list, char* data, char* nextData);
