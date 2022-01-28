@@ -10,6 +10,7 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * More functions like *deleteNode.
 * Linked list manipulation.
 * Format fixes coming soon...
+* Seperate files for each function and 1 master file with all functions included
   
 ### Current Languages Implemented:   
 * C Programming Language  
