@@ -1,39 +1,31 @@
-//standard libraries that include the functions we need
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//function prototypes; allow functions to be used without clutter of at the top of main
-// Definition of a node structure
-// a linked list is a data structure made up of node linked to each other
-typedef struct node
-{
+typedef struct node {
     char* name;
     struct node* next;
 }
 node;
-node* addNode(node *list, char* data);
+
+node* appendNode(node *list, char* data);
 node* allocNode(node *list);
-node* insrtNodeBfr(node *list, char* data, char* nextData);
-node* prepend(node *list, char* data);
-node* insertNodeAftr(node *list, char* data, char* nextData);
+node* insertNodeBefore(node *list, char* data, char* nextData);
+node* prependNode(node *list, char* data);
+node* insertNodeAfter(node *list, char* data, char* nextData);
+node* reverseList(node *list);
 
-int main(void)
-{
-    node* list = addNode(NULL,"Banana");
-    addNode(list,"Cantaloupe");
-    addNode(list,"Dragon Fruit");
-    addNode(list,"Fig");
-    insrtNodeBfr(list,"Elderberry", "Fig");
-    insrtNodeBfr(list,"Blueberry", "Cantaloupe");
-    insertNodeAftr(list, "Cherry", "Cantaloupe");
-    list = prepend(list, "Apple");
-    for(node *current = list;current != NULL;current = current->next){
-        printf("%s\n", current->name );
-    }
-
-
+int main(void) {
+    node* list = appendNode(NULL,"Banana");
+    appendNode(list,"Cantaloupe");
+    appendNode(list,"Dragon Fruit");
+    appendNode(list,"Fig");
+    insertNodeBefore(list,"Elderberry", "Fig");
+    insertNodeBefore(list,"Blueberry", "Cantaloupe");
+    insertNodeAfter(list, "Cherry", "Cantaloupe");
+    list = prependNode(list, "Apple");
+    list = reverseList(list);
 }
-node* allocNode(node *list) {
+node* allocNode(node* list) {
     node *n = malloc(sizeof(node));
     if(n == NULL) {
         node *tmp = list->next;
@@ -45,7 +37,7 @@ node* allocNode(node *list) {
     }
     return n;
 }
-node* addNode(node *list, char* data) {
+node* appendNode(node* list, char* data) {
     node *n = allocNode(list);
     if(n != NULL) {
         n->name = data;
@@ -61,8 +53,8 @@ node* addNode(node *list, char* data) {
     }
     return n;
 }
-node* insrtNodeBfr(node *list, char* data, char* nextData) {
-    node *n = allocNode(list);
+node* insertNodeBefore(node* list, char* data, char* nextData) {
+    node* n = allocNode(list);
     if(n != NULL) {
         n->name = data;
         n->next = NULL;
@@ -82,8 +74,8 @@ node* insrtNodeBfr(node *list, char* data, char* nextData) {
     }
     return n;
 }
-node* insertNodeAftr(node *list, char* data, char* beforeData) {
-    node *n = allocNode(list);
+node* insertNodeAfter(node* list, char* data, char* beforeData) {
+    node* n = allocNode(list);
     if(n != NULL) {
         n->name = data;
         n->next = NULL;
@@ -102,10 +94,24 @@ node* insertNodeAftr(node *list, char* data, char* beforeData) {
     }
     return n;
 }
-node* prepend(node *list, char* data){
+node* prependNode(node* list, char* data){
     node *n = allocNode(list);
     n->next = list;
     list = n;
     list->name = data;
     return list;
 }
+node* reverseList(node* list) {
+    node* previous = allocNode(list);
+    node* next = allocNode(list);
+    previous = NULL;
+    for(node* current = list;current != NULL;current = next){
+        next = current->next;
+        current->next = previous;
+        previous = current;
+        current = next;
+    }
+    list = previous;
+    return list;
+}
+
