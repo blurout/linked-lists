@@ -134,7 +134,11 @@ int main(void) {
     // prints time and result
     printf("Time MiddleCounter %f  returns: %s\n", time_taken, str);
 }
-
+/**
+ * @brief allocates memory for a node, checks if memory is available
+ * @param list head of the list used to free the list if there is no memory available
+ * @return node* returns empty node
+ */
 node* allocNode(node* list) {
     node *n = malloc(sizeof(node));
     if(n == NULL) {
@@ -147,7 +151,13 @@ node* allocNode(node* list) {
     }
     return n;
 }
-//
+/**
+ * @brief adds node to the end of a list
+ * 
+ * @param list used for allocNode() to create a new node, used to traverse list and append a node to the tail
+ * @param data used to assign a data value to the new node
+ * @return node* returns the new completed node
+ */
 node* appendNode(node* list, char* data) {
     node *n = allocNode(list);
     if(n != NULL) {
@@ -164,6 +174,14 @@ node* appendNode(node* list, char* data) {
     }
     return n;
 }
+/**
+ * @brief inserts a node before the node with the provided data
+ * 
+ * @param list used to traverse list through head
+ * @param data data of node to be inserted
+ * @param nextData data of node to come after new node
+ * @return node*
+ */
 node* insertNodeBefore(node* list, char* data, char* nextData) {
     node* n = allocNode(list);
     if(n != NULL) {
@@ -185,6 +203,14 @@ node* insertNodeBefore(node* list, char* data, char* nextData) {
     }
     return n;
 }
+/**
+ * @brief inserts node after given data
+ * 
+ * @param list used to traverse list 
+ * @param data datat of new node to be inserted
+ * @param beforeData data of node that will be right before new node
+ * @return node* 
+ */
 node* insertNodeAfter(node* list, char* data, char* beforeData) {
     node* n = allocNode(list);
     if(n != NULL) {
@@ -205,6 +231,13 @@ node* insertNodeAfter(node* list, char* data, char* beforeData) {
     }
     return n;
 }
+/**
+ * @brief creates a new head of the list
+ * 
+ * @param list used to prepend node before the head
+ * @param data data of new node
+ * @return node* 
+ */
 node* prependNode(node* list, char* data){
     node *n = allocNode(list);
     n->next = list;
@@ -212,6 +245,12 @@ node* prependNode(node* list, char* data){
     list->name = data;
     return list;
 }
+/**
+ * @brief reverses entire list 
+ * 
+ * @param list used to traverse list
+ * @return node* returned in order to set new head
+ */
 node* reverseList(node* list) {
     node* previous = allocNode(list);
     node* next = allocNode(list);
@@ -225,6 +264,13 @@ node* reverseList(node* list) {
     list = previous;
     return list;
 }
+/**
+ * @brief deletes a node from list
+ * 
+ * @param list used to traverse node
+ * @param data used to identify node to be deleted
+ * @return node* 
+ */
 node* removeNode(node* list, char* data) {
     node* delete = list;
     node* previous = allocNode(list);
@@ -240,6 +286,11 @@ node* removeNode(node* list, char* data) {
     previous->next = delete->next;
     return list;
 }
+/**
+ * @brief prints list using loop
+ * 
+ * @param list used to traverse each node
+ */
 void printList(node* list) {
     for(node* current = list;current != NULL;current = current->next) {
         printf("%s\n", current->name );
@@ -247,7 +298,12 @@ void printList(node* list) {
     printf("\n");
     return;
 }
-
+/**
+ * @brief next four algorithms find middle and return middle node
+ * 
+ * @param list 
+ * @return node* 
+ */
 node* middleEven(node* list) {
     int count = 0;
     node* tmp = list;
