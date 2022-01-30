@@ -42,48 +42,92 @@ node* middleZipZip(node* list);
 node* middleCounter(node* list, int MYMIDDLE);
 
 int main(void) {
+    // list named 'list' is initialized with a head string "Banana"
     node* list = appendNode(NULL,"Banana");
+    // "Cantaloupe" is added to the end of the list
     appendNode(list,"Cantaloupe");
+    // "Dragon Fruit" is added to the end of the list
     appendNode(list,"Dragon Fruit");
+    // "Fig" is added to the end of the list
     appendNode(list,"Fig");
-
+    // "Elderberry" is inserted before "Fig"
     insertNodeBefore(list,"Elderberry", "Fig");
+    // "Blueberry" is inserted before "Cantaloupe"
     insertNodeBefore(list,"Blueberry", "Cantaloupe");
+    // "Cherry" is inserted before "Cantaloupe"
     insertNodeAfter(list, "Cherry", "Cantaloupe");
+    // prepends "Apple" to the lsit, "list" or the head of the list is assigned to a new node, whose data is "Apple", whose next is node points to previous head
     list = prependNode(list, "Apple");
+    // prints all the nodes in the list
     printList(list);
+    // reverses all the pointers of the current list and reassigns the tail to the head
     list = reverseList(list);
+    // prints all the nodes of the newly reversed list
     printList(list);
+    // removes the node with the data "Fig" from the linked list
     list = removeNode(list, "Fig");
+    // prints the list again
     printList(list);
 
-    clock_t t;
+    // finding and returning the middle of a singly linked list
+    // 4 algorithms
+    
+    // sets the amount of nodes to be appended to the list to better calculate time complexity
     const int NUMNODES = 15000;
+    // middle is predetermined to confirm correctness
     const int MYMIDDLE = NUMNODES/2;
+    // appends NUMNODES number of nodes to the original list above
     for(int i = 0; i <= NUMNODES; i++) {
+        // allocates memory for current addition of node
         char* istr = malloc(sizeof(char*));
+        // appends the new node to the list
+        // itoa is used here to convert the current iteration number as a string to be used as the nodes data
         appendNode(list, itoa (i,istr,10));
     }
-    double time_taken = 0;
-
-    t = clock();
-    char* str = middleEven(list)->name;
-    time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
-    printf("Time MiddleEven %f  returns: %s\n", time_taken, str);
     
+    // intializes the clock variable
+    clock_t t;
+    // sets a double to hold number of seconds starting from 0
+    double time_taken = 0;
+    
+    // first algorithm middleEven
+    // starts clocking
     t = clock();
-    str = middleSlow(list)->name;
+    // calls the algorithm middleEven and assigns the returned value to str
+    char* str = middleEven(list)->name;
+    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
+    // prints the seconds and the result of what it has returned
+    printf("Time MiddleEven %f  returns: %s\n", time_taken, str);
+ 
+    // second algorithm middleSlow (slowest)
+    // sets current number of clocks as the new start clock count
+    t = clock();
+    // calls the algorithm middleSlow and assigns the returned value to str
+    str = middleSlow(list)->name;
+    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
+    time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
+    // prints the seconds and the result of what it has returned
     printf("Time MiddleSlow %f  returns: %s\n", time_taken, str);
     
+    // third algorithm (fastest)
+    // sets current number of clocks as the new start clock count
     t = clock();
+    // calls the algorithm middleZipZip and assigns the returned value to str
     str = middleZipZip(list)->name;
+    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
+    // prints the seconds and the result of what it has returned
     printf("Time MiddleZipZip %f  returns: %s\n", time_taken, str);
     
+    // fourth algorithm (true fastest, but predetermined)
+    // sets current number of clocks as the new start clock count
     t = clock();
+    // calls the algorithm middelCounter and assigns the returned value to str
     str = middleCounter(list, MYMIDDLE)->name;
+    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
+    // prints the seconds and the result of what it has returned
     printf("Time MiddleCounter %f  returns: %s\n", time_taken, str);
 }
 node* allocNode(node* list) {
