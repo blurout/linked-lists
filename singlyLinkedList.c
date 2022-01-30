@@ -1,21 +1,32 @@
+// imports important libraries used throughout 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
+//definition of a node for a singly linked list, as a name and a pointer to the next node
 typedef struct node {
     char* name;
     struct node* next;
 }
 node;
 
+// prototypes of functions, easy reference for parameters and what each function does
+// prints all nodes specifically the name in list with a line in between each node
 void printList(node* list);
+// appends or adds a node to the end of the linked list
 node* appendNode(node *list, char* data);
+// allocates memory for a new node (used within functions)
 node* allocNode(node *list);
+// allows insertion of a node before a specified value within the linked list
 node* insertNodeBefore(node *list, char* data, char* nextData);
+// prepends or inserts a node to the start of the list
 node* prependNode(node *list, char* data);
+// allows insertion of a node after a specified value within the linked list
 node* insertNodeAfter(node *list, char* data, char* nextData);
+// reverses the entire linked list example: [1,2,3] -> [3,2,1]
 node* reverseList(node *list);
+// deletes a node from the linked list
 node* removeNode(node* list, char* data);
 
 node* middleEven(node* list);
@@ -29,15 +40,15 @@ int main(void) {
     appendNode(list,"Dragon Fruit");
     appendNode(list,"Fig");
 
-    // insertNodeBefore(list,"Elderberry", "Fig");
-    // insertNodeBefore(list,"Blueberry", "Cantaloupe");
-    // insertNodeAfter(list, "Cherry", "Cantaloupe");
-    // list = prependNode(list, "Apple");
-    // printList(list);
-    // list = reverseList(list);
-    // printList(list);
-    // list = removeNode(list, "Fig");
-    //printList(list);
+    insertNodeBefore(list,"Elderberry", "Fig");
+    insertNodeBefore(list,"Blueberry", "Cantaloupe");
+    insertNodeAfter(list, "Cherry", "Cantaloupe");
+    list = prependNode(list, "Apple");
+    printList(list);
+    list = reverseList(list);
+    printList(list);
+    list = removeNode(list, "Fig");
+    printList(list);
 
     clock_t t;
     const int NUMNODES = 1500000;
