@@ -1,82 +1,85 @@
-// imports important libraries used throughout 
+// imports libraries
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-//definition of a node for a singly linked list, as a name and a pointer to the next node
+
+//definition of a node for a singly linked list
 typedef struct node {
     char* name;
     struct node* next;
 }
 node;
 
-// prototypes of functions, easy reference for parameters and what each function does
-// prints all nodes specifically the name in list with a line in between each node
+
+// prototypes of functions, easy reference for parameters and return values
+// prints the data of all nodes of list
 void printList(node* list);
-// appends or adds a node to the end of the linked list
+// appends a node to the end of the list
 node* appendNode(node *list, char* data);
 // allocates memory for a new node (used within functions)
 node* allocNode(node *list);
-// allows insertion of a node before a specified value within the linked list
+// inserts node before a specified data within list
 node* insertNodeBefore(node *list, char* data, char* nextData);
-// prepends or inserts a node to the start of the list
+// prepends a node to the start of the list
 node* prependNode(node *list, char* data);
-// allows insertion of a node after a specified value within the linked list
+// inserts a node after a specified data within the linked list
 node* insertNodeAfter(node *list, char* data, char* nextData);
-// reverses the entire linked list example: [1]->[2]->[3] => [3]->[2]->[1]
+// reverses entire linked list example: [1]->[2]->[3] = [3]->[2]->[1]
 node* reverseList(node *list);
-// deletes a node from the linked list
+// deletes a node from the list
 node* removeNode(node* list, char* data);
 
-// start of methods that find and return the middle of a linked list
-
-// finds the middle node by only updating the return node when the counter is odd, when the loop reaches null, the tmp node had only traversed half of the list
+// start of methods that find and return the middle node of a linked list
+// updates return node when the counter is odd, when the loop reaches null, the tmp node had only traversed half of the list
 node* middleEven(node* list);
-// counts the length of the list, divides the length by 2, traverses for only half length of the list, returns node it finishes on
+// gets length of list, divides length by 2, traverses list until new length is reached, returns node it finishes on
 node* middleSlow(node* list);
-// original list is duplicated, the original list is traversed two nodes at a time, duplicate list one node at a time. 
-// once the original reaches null the duplicate reaches the middle and returns the current node
+// duplicates list, original list is traversed two nodes at a time, duplicate list one node at a time. 
+// original reaches null, duplicate reaches middle and returns the current node
 node* middleZipZip(node* list);
-// given a predermined length and middle length, list is traversed determined number of times and returns current node at the end of loop
+// middle length, list is traversed determined number of times, returns end node
 node* middleCounter(node* list, int MYMIDDLE);
 
+
+
 int main(void) {
-    // list named 'list' is initialized with a head string "Banana"
+    // node named 'list' is initialized as the head, wtih data "Banana"
     node* list = appendNode(NULL,"Banana");
-    // "Cantaloupe" is added to the end of the list
+    // "Cantaloupe" node is added
     appendNode(list,"Cantaloupe");
-    // "Dragon Fruit" is added to the end of the list
+    // "Dragon Fruit" node is added
     appendNode(list,"Dragon Fruit");
-    // "Fig" is added to the end of the list
+    // "Fig" node is added
     appendNode(list,"Fig");
-    // "Elderberry" is inserted before "Fig"
+    // "Elderberry" node is inserted before "Fig"
     insertNodeBefore(list,"Elderberry", "Fig");
-    // "Blueberry" is inserted before "Cantaloupe"
+    // "Blueberry" node is inserted before "Cantaloupe"
     insertNodeBefore(list,"Blueberry", "Cantaloupe");
-    // "Cherry" is inserted before "Cantaloupe"
+    // "Cherry" node is inserted before "Cantaloupe"
     insertNodeAfter(list, "Cherry", "Cantaloupe");
-    // prepends "Apple" to the lsit, "list" or the head of the list is assigned to a new node, whose data is "Apple", whose next is node points to previous head
+    // prepends node with data "Apple" to the list, "Apple" node becomes head
     list = prependNode(list, "Apple");
-    // prints all the nodes in the list
+    // prints all the data in the list
     printList(list);
-    // reverses all the pointers of the current list and reassigns the tail to the head
+    // reverses all the pointers of the current list
     list = reverseList(list);
-    // prints all the nodes of the newly reversed list
+    // prints all the data in the list
     printList(list);
-    // removes the node with the data "Fig" from the linked list
+    // removes node with the data "Fig" from list
     list = removeNode(list, "Fig");
-    // prints the list again
+    // prints all the data in the list
     printList(list);
 
     // finding and returning the middle of a singly linked list
     // 4 algorithms
     
-    // sets the amount of nodes to be appended to the list to better calculate time complexity
+    // nums nodes to be appended to list (to calculate time complexity)
     const int NUMNODES = 15000;
-    // middle is predetermined to confirm correctness
+    // middle is predetermined to check
     const int MYMIDDLE = NUMNODES/2;
-    // appends NUMNODES number of nodes to the original list above
+    // appends NUMNODES number of nodes list above
     for(int i = 0; i <= NUMNODES; i++) {
         // allocates memory for current addition of node
         char* istr = malloc(sizeof(char*));
@@ -85,19 +88,20 @@ int main(void) {
         appendNode(list, itoa (i,istr,10));
     }
     
+
+
     // intializes the clock variable
     clock_t t;
     // sets a double to hold number of seconds starting from 0
     double time_taken = 0;
-    
     // first algorithm middleEven
     // starts clocking
     t = clock();
-    // calls the algorithm middleEven and assigns the returned value to str
+    // calls middleEven, assigns returned value to str
     char* str = middleEven(list)->name;
-    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
+    // subtracts clocks in 't' from current number of clocks, gives true number of clocks. assigns time_taken to seconds converted from clocks
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
-    // prints the seconds and the result of what it has returned
+    // prints time and result
     printf("Time MiddleEven %f  returns: %s\n", time_taken, str);
  
     // second algorithm middleSlow (slowest)
@@ -105,31 +109,32 @@ int main(void) {
     t = clock();
     // calls the algorithm middleSlow and assigns the returned value to str
     str = middleSlow(list)->name;
-    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
+    // subtracts clocks in 't' from current number of clocks, gives true number of clocks. assigns time_taken to seconds converted from clocks
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
-    // prints the seconds and the result of what it has returned
+    // prints time and result
     printf("Time MiddleSlow %f  returns: %s\n", time_taken, str);
     
-    // third algorithm (fastest)
+    // third algo (fastest)
     // sets current number of clocks as the new start clock count
     t = clock();
-    // calls the algorithm middleZipZip and assigns the returned value to str
+    // calls middleZipZip, assigns returned value to str
     str = middleZipZip(list)->name;
-    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
+    // subtracts clocks in 't' from current number of clocks, gives true number of clocks. assigns time_taken to seconds converted from clocks
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
-    // prints the seconds and the result of what it has returned
+    // prints time and result
     printf("Time MiddleZipZip %f  returns: %s\n", time_taken, str);
     
-    // fourth algorithm (true fastest, but predetermined)
+    // fourth algo (true fastest, but predetermined)
     // sets current number of clocks as the new start clock count
     t = clock();
-    // calls the algorithm middelCounter and assigns the returned value to str
+    // calls middelCounter, assigns returned value to str
     str = middleCounter(list, MYMIDDLE)->name;
-    // subtracts the number of clocks stored in 't' from the current number of clocks, giving us the true number of clocks. converts clocks to seconds and assigns it to time_taken
+    // subtracts clocks in 't' from current number of clocks, gives true number of clocks. assigns time_taken to seconds converted from clocks
     time_taken = ((double) (clock() - t))/CLOCKS_PER_SEC; // in seconds
-    // prints the seconds and the result of what it has returned
+    // prints time and result
     printf("Time MiddleCounter %f  returns: %s\n", time_taken, str);
 }
+
 node* allocNode(node* list) {
     node *n = malloc(sizeof(node));
     if(n == NULL) {
@@ -142,6 +147,7 @@ node* allocNode(node* list) {
     }
     return n;
 }
+//
 node* appendNode(node* list, char* data) {
     node *n = allocNode(list);
     if(n != NULL) {
