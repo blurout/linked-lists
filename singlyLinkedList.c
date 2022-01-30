@@ -24,7 +24,7 @@ node* insertNodeBefore(node *list, char* data, char* nextData);
 node* prependNode(node *list, char* data);
 // allows insertion of a node after a specified value within the linked list
 node* insertNodeAfter(node *list, char* data, char* nextData);
-// reverses the entire linked list example: [1,2,3] -> [3,2,1]
+// reverses the entire linked list example: [1]->[2]->[3] => [3]->[2]->[1]
 node* reverseList(node *list);
 // deletes a node from the linked list
 node* removeNode(node* list, char* data);
