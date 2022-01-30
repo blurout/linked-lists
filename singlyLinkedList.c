@@ -29,9 +29,16 @@ node* reverseList(node *list);
 // deletes a node from the linked list
 node* removeNode(node* list, char* data);
 
+// start of methods that find and return the middle of a linked list
+
+// finds the middle node by only updating the return node when the counter is odd, when the loop reaches null, the tmp node had only traversed half of the list
 node* middleEven(node* list);
+// counts the length of the list, divides the length by 2, traverses for only half length of the list, returns node it finishes on
 node* middleSlow(node* list);
+// original list is duplicated, the original list is traversed two nodes at a time, duplicate list one node at a time. 
+// once the original reaches null the duplicate reaches the middle and returns the current node
 node* middleZipZip(node* list);
+// given a predermined length and middle length, list is traversed determined number of times and returns current node at the end of loop
 node* middleCounter(node* list, int MYMIDDLE);
 
 int main(void) {
@@ -51,7 +58,7 @@ int main(void) {
     printList(list);
 
     clock_t t;
-    const int NUMNODES = 1500000;
+    const int NUMNODES = 15000;
     const int MYMIDDLE = NUMNODES/2;
     for(int i = 0; i <= NUMNODES; i++) {
         char* istr = malloc(sizeof(char*));
