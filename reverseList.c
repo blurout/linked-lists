@@ -1,57 +1,52 @@
-// imports libraries
+// imports important libraries used throughout 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
-//definition of a node for a singly linked list
+//definition of a node for a singly linked list, as a name and a pointer to the next node
 typedef struct node {
     char* name;
     struct node* next;
 }
 node;
 
-// prototypes of functions, easy reference for parameters and return values
-// prints the data of all nodes of list
+// prototypes of functions, easy reference for parameters and what each function does
+// prints all nodes specifically the name in list with a line in between each node
 void printList(node* list);
-// appends a node to the end of the list
+// appends or adds a node to the end of the linked list
 node* appendNode(node *list, char* data);
 // allocates memory for a new node (used within functions)
 node* allocNode(node *list);
-// inserts node before a specified data within list
+// allows insertion of a node before a specified value within the linked list
 node* insertNodeBefore(node *list, char* data, char* nextData);
-// prepends a node to the start of the list
+// prepends or inserts a node to the start of the list
 node* prependNode(node *list, char* data);
-// inserts a node after a specified data within the linked list
+// allows insertion of a node after a specified value within the linked list
 node* insertNodeAfter(node *list, char* data, char* nextData);
-// deletes a node from the list
+// reverses the entire linked list example: [1,2,3] -> [3,2,1]
+node* reverseList(node *list);
+// deletes a node from the linked list
 node* removeNode(node* list, char* data);
 
 int main(void) {
-    // node named 'list' is initialized as the head, wtih data "Banana"
-    node* list = appendNode(NULL,"Banana");
-    // "Cantaloupe" node is added
-    appendNode(list,"Cantaloupe");
-    // "Dragon Fruit" node is added
-    appendNode(list,"Dragon Fruit");
-    // "Fig" node is added
-    appendNode(list,"Fig");
-    // "Elderberry" node is inserted before "Fig"
-    insertNodeBefore(list,"Elderberry", "Fig");
-    // "Blueberry" node is inserted before "Cantaloupe"
-    insertNodeBefore(list,"Blueberry", "Cantaloupe");
-    // "Cherry" node is inserted before "Cantaloupe"
-    insertNodeAfter(list, "Cherry", "Cantaloupe");
-    // prepends node with data "Apple" to the list, "Apple" node becomes head
-    list = prependNode(list, "Apple");
-    // prints all the data in the list
+    // list named 'list' is initialized with a head string "Banana"
+    node* list = appendNode(NULL,"Nuh");
+    // "Cantaloupe" is added to the end of the list
+    appendNode(list,"Yusuf");
+    // "Dragon Fruit" is added to the end of the list
+    appendNode(list,"Musa");
+    // "Elderberry" is inserted before "Fig"
+    insertNodeBefore(list,"Yaqub", "Yusuf");
+    // "Cherry" is inserted before "Cantaloupe"
+    insertNodeAfter(list, "Eesa", "Musa");
+    // prepends "Apple" to the lsit, "list" or the head of the list is assigned to a new node, whose data is "Apple", whose next is node points to previous head
+    list = prependNode(list, "Adam");
+    // prints all the nodes in the list
     printList(list);
-    // reverses all the pointers of the current list
-    // prints all the data in the list
-    printList(list);
-    // removes node with the data "Fig" from list
-    removeNode(list, "Fig");
-    // prints all the data in the list
+    // reverses all the pointers of the current list and reassigns the tail to the head
+    list = reverseList(list);
+    // prints all the nodes of the newly reversed list
     printList(list);
 }
 /**
@@ -208,7 +203,8 @@ node* removeNode(node* list, char* data) {
 }
 /**
  * @brief prints list using loop
- * @param list used to traverse each node, starts from head
+ * 
+ * @param list used to traverse each node
  */
 void printList(node* list) {
     for(node* current = list;current != NULL;current = current->next) {
