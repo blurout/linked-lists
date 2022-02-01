@@ -31,7 +31,7 @@ int main(void) {
     // 4 algorithms
     node* list = appendNode(NULL, 1);
     // nums nodes to be appended to list (to calculate time complexity)
-    const int NUMNODES = 500000;
+    const int NUMNODES = 5000;
     // middle is predetermined to check
     const int MYMIDDLE = NUMNODES/2;
     // appends NUMNODES number of nodes list above
@@ -127,15 +127,18 @@ node* appendNode(node* list, int data) {
     return n;
 }
 
+// next four algorithms find middle and return middle node
 /**
- * @brief next four algorithms find middle and return middle node
+ * @brief finds and returns middle node
  * 
- * @param list 
- * @return node* 
+ * @param list used to traverse list
+ * @return node* the middle node that is returned
  */
 node* middleEven(node* list) {
     int count = 0;
+    // duplicates head
     node* tmp = list;
+    // traverses list ever iteration, tmp is re assigned only on odd counts
     for(; list != NULL; list = list->next) {
         if(count % 2 != 0) {
             tmp = tmp->next; 
@@ -143,8 +146,16 @@ node* middleEven(node* list) {
         count++;
        // mid = tmp;
     }
+    // list reaches NULL while tmp reaches middle
     return tmp;
 }
+/**
+ * @brief traverses list only predefined number of times
+ * 
+ * @param list list to be iterated through
+ * @param MYMIDDLE predetermined halfway point
+ * @return node* returns end node
+ */
 node* middleCounter(node* list, int MYMIDDLE) {
     int count = 0;
     node* mid;
@@ -153,6 +164,12 @@ node* middleCounter(node* list, int MYMIDDLE) {
     }
     return list;
 }
+/**
+ * @brief two pointers traverse list one at double speed
+ * 
+ * @param list original list to be traversed
+ * @return node* final tmp value returned as middle
+ */
 node* middleZipZip(node* list) {
     int count = 0;
     node* tmp = list;
@@ -161,6 +178,12 @@ node* middleZipZip(node* list) {
     }
     return tmp;
 }
+/**
+ * @brief counts the length of list then traverses list again until half count is reached
+ * 
+ * @param list original list
+ * @return node* returns middle node
+ */
 node* middleSlow(node* list) {
     int count = 0;
     node* tmp = list;

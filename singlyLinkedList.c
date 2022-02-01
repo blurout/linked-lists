@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
 
 //definition of a node for a singly linked list
 typedef struct node {
@@ -26,6 +25,10 @@ node* prependNode(node *list, char* data);
 node* insertNodeAfter(node *list, char* data, char* nextData);
 // deletes a node from the list
 node* removeNode(node* list, char* data);
+// returns middle node of the list
+node* middleList(node* list);
+// reverses the entire linked list example: [1,2,3] -> [3,2,1]
+node* reverseList(node *list);
 
 int main(void) {
     // node named 'list' is initialized as the head, wtih data "Banana"
@@ -46,12 +49,15 @@ int main(void) {
     list = prependNode(list, "Apple");
     // prints all the data in the list
     printList(list);
-    // reverses all the pointers of the current list
-    // prints all the data in the list
-    printList(list);
     // removes node with the data "Fig" from list
     removeNode(list, "Fig");
     // prints all the data in the list
+    printList(list);
+    // prints data of middleNode
+    printf("%s\n\n", middleList(list)->name);
+    // reverses all the pointers of the current list
+    list = reverseList(list);
+    // prints data of reversed list
     printList(list);
 }
 /**
@@ -216,4 +222,18 @@ void printList(node* list) {
     }
     printf("\n");
     return;
+}
+/**
+ * @brief two pointers traverse list one at double speed
+ * 
+ * @param list original list to be traversed
+ * @return node* final tmp value returned as middle
+ */
+node* middleList(node* list) {
+    int count = 0;
+    node* tmp = list;
+    for(; list != NULL && list->next !=NULL; list = list->next->next) {
+         tmp = tmp->next; 
+    }
+    return tmp;
 }
