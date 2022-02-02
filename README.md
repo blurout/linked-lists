@@ -29,6 +29,8 @@ Super basic linked list. My first time writing up a data structure from scratch 
 ### ***More updates coming soon to this repository:*** ###  
 * planning on uploading multiple implementations of this data structure in the future in different languages as I learn them
 * format fixes coming soon...
+* convert binary to decimal function
+* convert decimal to binary function
   
 ### Current Languages Implemented:   
 * C Programming Language  
