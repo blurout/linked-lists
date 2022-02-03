@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
+
 typedef struct node {
     int data;
     struct node* next;
@@ -11,6 +13,7 @@ node* allocNode(node* head);
 node* appendNode(node* head, int data);
 int bi2dec(node* head);
 int dec2bi(node* head);
+int r(int num);
 
 int main(void) {
 
@@ -18,9 +21,10 @@ int main(void) {
     node* list = appendNode(NULL, 1);
     appendNode(list, 0);
     appendNode(list, 1);
+    
     printf("%i\n", bi2dec(list));
-    printf("%i", dec2bi(list));
-
+    char* buffer;
+    printf("%s", itoa(dec2bi(list), buffer, 2));
 }
 
 node* allocNode(node* head) {
@@ -77,16 +81,16 @@ int dec2bi(node* head) {
         head = head->next;
         len++;
     }
-    if(len <= 1 && head->data == 0) {
-        return 0;
-    }
     int binary = 0;
-    while (list != NULL) {
+    if(len == 2){
+        binary += 1;
+    }
+    while(list != NULL) {
         if(list->data != 0) {
             binary += pow(10, len);
         }
-        len--;
         list = list->next;
+        len--;
     }
     return binary;
 }
