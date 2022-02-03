@@ -230,7 +230,6 @@ void printList(node* list) {
  * @return node* final tmp value returned as middle
  */
 node* middleList(node* list) {
-    int count = 0;
     node* tmp = list;
     for(; list != NULL && list->next !=NULL; list = list->next->next) {
          tmp = tmp->next; 
