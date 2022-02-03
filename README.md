@@ -16,7 +16,9 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * added middleList()
 * added comments explaining every line in main()
 * added comments explaining every function
-* Linked list manipulation  
+* Linked list manipulation   
+#### conversion.c:   
+* converts binary number in a linked list to decimal 
 #### reverseList.c:  
 * added reverseList()
 * comments explaining every line in main()
