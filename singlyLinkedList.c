@@ -29,6 +29,8 @@ node* removeNode(node* list, char* data);
 node* middleList(node* list);
 // reverses the entire linked list example: [1,2,3] -> [3,2,1]
 node* reverseList(node *list);
+// deletes middle node and returns head of new list
+node* deleteMiddle(node* list);
 
 int main(void) {
     // node named 'list' is initialized as the head, wtih data "Banana"
@@ -48,17 +50,18 @@ int main(void) {
     // prepends node with data "Apple" to the list, "Apple" node becomes head
     list = prependNode(list, "Apple");
     // prints all the data in the list
-    printList(list);
     // removes node with the data "Fig" from list
     removeNode(list, "Fig");
     // prints all the data in the list
-    printList(list);
     // prints data of middleNode
     printf("%s\n\n", middleList(list)->name);
     // reverses all the pointers of the current list
-    list = reverseList(list);
     // prints data of reversed list
     printList(list);
+    deleteMiddle(list);
+    printList(list);
+     list = reverseList(list);
+
 }
 /**
  * @brief allocates memory for a node, checks if memory is available
@@ -235,4 +238,29 @@ node* middleList(node* list) {
          tmp = tmp->next; 
     }
     return tmp;
+}
+/**
+ * @brief deletes middle node and returns new list
+ * 
+ * @param list list that needs middle deleted
+ * @return node* head of the list
+ */
+node* deleteMiddle(node* list){
+    node* mid = list;
+    node* fast = list;
+    node* prev = NULL;
+    if(list->next == NULL){
+        return prev;
+    }
+    else if(list->next->next == NULL) {
+        list->next = NULL;
+        return list;
+    }
+    while(fast && fast->next) {
+        prev = mid;
+        mid = mid->next;
+        fast = fast->next->next;
+    }
+    prev->next = prev->next->next;
+    return list;
 }
