@@ -9,7 +9,9 @@ typedef struct node {
     struct node* next;
 }
 node;
-
+/**
+IGNORE COMMENTS!!!
+*/
 // prototypes of functions, easy reference for parameters and return dataues
 // prints the data of all nodes of list
 void printList(node* list);
