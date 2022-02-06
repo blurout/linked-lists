@@ -18,6 +18,7 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * added comments explaining every function
 * Linked list manipulation   
 * added deleteMiddle()
+* added sortList()
 #### conversion.c:   
 * converts binary number in a linked list to decimal 
 * converts decimal number in a linked list to binary
@@ -35,7 +36,9 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * my first time writing a linked list
 ### ***More updates coming soon to this repository:*** ###  
 * planning on uploading multiple implementations of this data structure in the future in different languages as I learn them
-* format fixes coming soon...  
+* format fixes coming soon... 
+* multiple sort algorithms
+* random comment fixes 
 ### Current Languages Implemented:   
 * C Programming Language  
   

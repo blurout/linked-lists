@@ -5,63 +5,46 @@
 
 //definition of a node for a singly linked list
 typedef struct node {
-    char* name;
+    int data;
     struct node* next;
 }
 node;
 
-// prototypes of functions, easy reference for parameters and return values
+// prototypes of functions, easy reference for parameters and return dataues
 // prints the data of all nodes of list
 void printList(node* list);
 // appends a node to the end of the list
-node* appendNode(node *list, char* data);
+node* appendNode(node *list, int data);
 // allocates memory for a new node (used within functions)
 node* allocNode(node *list);
 // inserts node before a specified data within list
-node* insertNodeBefore(node *list, char* data, char* nextData);
+node* insertNodeBefore(node *list, int data, int nextData);
 // prepends a node to the start of the list
-node* prependNode(node *list, char* data);
+node* prependNode(node *list, int data);
 // inserts a node after a specified data within the linked list
-node* insertNodeAfter(node *list, char* data, char* nextData);
+node* insertNodeAfter(node *list, int data, int nextData);
 // deletes a node from the list
-node* removeNode(node* list, char* data);
+node* removeNode(node* list, int data);
 // returns middle node of the list
 node* middleList(node* list);
 // reverses the entire linked list example: [1,2,3] -> [3,2,1]
 node* reverseList(node *list);
 // deletes middle node and returns head of new list
 node* deleteMiddle(node* list);
+node* sortList(node* list);
 
 int main(void) {
-    // node named 'list' is initialized as the head, wtih data "Banana"
-    node* list = appendNode(NULL,"Banana");
+    // node datad 'list' is initialized as the head, wtih data "Banana"
+    node* list = appendNode(NULL,3);
     // "Cantaloupe" node is added
-    appendNode(list,"Cantaloupe");
+    appendNode(list,6);
     // "Dragon Fruit" node is added
-    appendNode(list,"Dragon Fruit");
+    appendNode(list,0);
     // "Fig" node is added
-    appendNode(list,"Fig");
-    // "Elderberry" node is inserted before "Fig"
-    insertNodeBefore(list,"Elderberry", "Fig");
-    // "Blueberry" node is inserted before "Cantaloupe"
-    insertNodeBefore(list,"Blueberry", "Cantaloupe");
-    // "Cherry" node is inserted before "Cantaloupe"
-    insertNodeAfter(list, "Cherry", "Cantaloupe");
-    // prepends node with data "Apple" to the list, "Apple" node becomes head
-    list = prependNode(list, "Apple");
-    // prints all the data in the list
-    // removes node with the data "Fig" from list
-    removeNode(list, "Fig");
-    // prints all the data in the list
-    // prints data of middleNode
-    printf("%s\n\n", middleList(list)->name);
-    // reverses all the pointers of the current list
-    // prints data of reversed list
+    appendNode(list,34);
     printList(list);
-    deleteMiddle(list);
+    sortList(list);
     printList(list);
-     list = reverseList(list);
-
 }
 /**
  * @brief allocates memory for a node, checks if memory is available
@@ -84,13 +67,13 @@ node* allocNode(node* list) {
  * @brief adds node to the end of a list
  * 
  * @param list used for allocNode() to create a new node, used to traverse list and append a node to the tail
- * @param data used to assign a data value to the new node
+ * @param data used to assign a data dataue to the new node
  * @return node* returns the new completed node
  */
-node* appendNode(node* list, char* data) {
+node* appendNode(node* list, int data) {
     node *n = allocNode(list);
     if(n != NULL) {
-        n->name = data;
+        n->data = data;
         n->next = NULL;
         if (list==NULL) {
             return n;
@@ -111,16 +94,16 @@ node* appendNode(node* list, char* data) {
  * @param nextData data of node to come after new node
  * @return node*
  */
-node* insertNodeBefore(node* list, char* data, char* nextData) {
+node* insertNodeBefore(node* list, int data, int nextData) {
     node* n = allocNode(list);
     if(n != NULL) {
-        n->name = data;
+        n->data = data;
         n->next = NULL;
         //n->next = list->next;
         if (list->next==NULL) {
             return n;
         }
-        while(list->next->name != nextData) {
+        while(list->next->data != nextData) {
             list = list->next;
             if (list->next ==NULL) {
                 printf("Warning: %s not found for insertion before\n", nextData);
@@ -140,15 +123,15 @@ node* insertNodeBefore(node* list, char* data, char* nextData) {
  * @param beforeData data of node that will be right before new node
  * @return node* 
  */
-node* insertNodeAfter(node* list, char* data, char* beforeData) {
+node* insertNodeAfter(node* list, int data, int beforeData) {
     node* n = allocNode(list);
     if(n != NULL) {
-        n->name = data;
+        n->data = data;
         n->next = NULL;
         if (list->next==NULL) {
             return n;
         }
-        while(list->next->name != beforeData) {
+        while(list->next->data != beforeData) {
             list = list->next;
             if (list->next == NULL) {
                 printf("Warning: %s not found for insertion \n", beforeData);
@@ -167,11 +150,11 @@ node* insertNodeAfter(node* list, char* data, char* beforeData) {
  * @param data data of new node
  * @return node* 
  */
-node* prependNode(node* list, char* data){
+node* prependNode(node* list, int data){
     node *n = allocNode(list);
     n->next = list;
     list = n;
-    list->name = data;
+    list->data = data;
     return list;
 }
 /**
@@ -200,15 +183,15 @@ node* reverseList(node* list) {
  * @param data used to identify node to be deleted
  * @return node* 
  */
-node* removeNode(node* list, char* data) {
+node* removeNode(node* list, int data) {
     node* delete = list;
     node* previous = allocNode(list);
-    if (delete != NULL && delete->name == data) {
+    if (delete != NULL && delete->data == data) {
         list = delete->next; // Changed head
         free(delete); // free old head
         return list;
     }
-    while (delete->name != data) {
+    while (delete->data != data) {
         previous = delete;
         delete = delete->next;
     }
@@ -221,7 +204,7 @@ node* removeNode(node* list, char* data) {
  */
 void printList(node* list) {
     for(node* current = list;current != NULL;current = current->next) {
-        printf("%s\n", current->name );
+        printf("%i\n", current->data );
     }
     printf("\n");
     return;
@@ -230,7 +213,7 @@ void printList(node* list) {
  * @brief two pointers traverse list one at double speed
  * 
  * @param list original list to be traversed
- * @return node* final tmp value returned as middle
+ * @return node* final tmp dataue returned as middle
  */
 node* middleList(node* list) {
     node* tmp = list;
@@ -262,5 +245,37 @@ node* deleteMiddle(node* list){
         fast = fast->next->next;
     }
     prev->next = prev->next->next;
+    return list;
+}
+node* sortList(node* list){
+    if(list == NULL || list->next == NULL) {
+       return list;
+    }
+    node* current = list;
+    node* nxt = current->next;
+    node* p = list;
+    int count = 0;
+    int len = 0;
+    int buffer;
+    while(p->next) {
+        p = p->next;
+        len++;
+    }
+    while(count < len) {
+        for(int i = 0; i < len; i++) {
+            if(current->data > nxt->data) {
+                buffer = current->data;
+                current->data = nxt->data;
+                nxt->data = buffer;
+            }
+            if(current->next && nxt->next) {
+                current = current->next;
+                nxt = nxt->next;
+            }
+        }
+        current = list;
+        nxt = list->next;
+        count++;
+    }
     return list;
 }
