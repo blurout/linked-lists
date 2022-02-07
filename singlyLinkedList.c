@@ -33,19 +33,23 @@ node* middleList(node* list);
 node* reverseList(node *list);
 // deletes middle node and returns head of new list
 node* deleteMiddle(node* list);
+// sorts a given linked list using bubble sort
 node* sortList(node* list);
 
 int main(void) {
-    // node datad 'list' is initialized as the head, wtih data "Banana"
-    node* list = appendNode(NULL,3);
-    // "Cantaloupe" node is added
-    appendNode(list,6);
-    // "Dragon Fruit" node is added
-    appendNode(list,0);
-    // "Fig" node is added
-    appendNode(list,34);
+    // node datad 'list' is initialized as the head, wtih data
+    node* list = appendNode(NULL, 3);
+    // 6 node is added
+    appendNode(list, 6);
+    // 0 node is added
+    appendNode(list, 0);
+    // 34 node is appended as the head of the list
+    appendNode(list, 34);
+    // prints current list nodes in order
     printList(list);
+    // sorts current list from least to greatest
     sortList(list);
+    // prints new list in order
     printList(list);
 }
 /**
@@ -249,6 +253,12 @@ node* deleteMiddle(node* list){
     prev->next = prev->next->next;
     return list;
 }
+/**
+ * @brief sorts nodes in list from least to greatest data, returns new list
+ * 
+ * @param list to be sorted
+ * @return node* head of new sorted list
+ */
 node* sortList(node* list){
     if(list == NULL || list->next == NULL) {
        return list;
