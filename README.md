@@ -29,6 +29,8 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * added reverseList()
 * comments explaining every line in main()
 * comments explaining every function  
+#### reverseKGroup.c:  
+* coming soon...
 #### middleList.c:  
 * added four implementations of finding and returning middle node
 * added timer to clock the speed of each implementation of middleList.c
@@ -42,6 +44,7 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * multiple sort algorithms
 * random comment fixes 
 * linked list sort algorithms file (sort.c)
+* reverseKGroup.c (leetcode question)
 ### Current Languages Implemented:   
 * C Programming Language  
   
