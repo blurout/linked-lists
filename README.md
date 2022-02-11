@@ -2,7 +2,7 @@
 Super basic linked list. My first time writing up a data structure from scratch (list.c).  
   
 ## Current Updates: 
-* seperated files for each function and 1 master file with all functions included (singlyLinkedList.c)  
+* seperated `directories` for each language and 1 master file with all functions included (singlyLinkedList)  
 * better comments and explanation  
 ## C:    
 ##### singlyLinkedList.c:  
