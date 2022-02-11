@@ -1,0 +1,32 @@
+package main
+
+import (
+	"fmt"
+)
+
+type node struct {
+	val int
+	next *node
+}
+
+func main() {
+	myList := node{next: nil}
+	n := node{val: 1, next: nil}
+	myList = n
+
+	newNode0 := node{val: 2, next: nil}
+	myList.next = &newNode0
+
+	newNode1 := node{val: 3, next: nil}
+	myList.next.next = &newNode1
+
+	var tmp *node
+	tmp = &myList
+	for tmp != nil{
+		if tmp == nil {
+			break
+		}
+		fmt.Println(tmp.val)
+		tmp = tmp.next
+	}
+}
