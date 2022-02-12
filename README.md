@@ -40,6 +40,10 @@ Super basic linked list. My first time writing up a data structure from scratch 
 ##### list.c:
 * my first time writing a linked list
 ## GO:
+##### singlyLinkedList.go
+* added appendNode()
+* added printList()
+* added removeNode()
 ##### list.go:
 * simple linked list in GO
 ## ***More updates coming soon to this repository:*** ###  
