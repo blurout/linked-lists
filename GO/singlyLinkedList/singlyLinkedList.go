@@ -10,11 +10,22 @@ type node struct {
 }
 
 func main() {
-	list := appendNode(nil, 3)
-	appendNode(list, 32)
-	list.printlist()
+	list := appendNode(nil, 1)
+	appendNode(list, 2)
+	appendNode(list, 3)
+	appendNode(list, 4)
+	appendNode(list, 5)
+	appendNode(list, 3)
+	appendNode(list, 3)
+	appendNode(list, 3)
+	appendNode(list, 3)
+
 	list = removeNode(list, 3)
-	list = removeNode(list, 32)
+	list.printlist()
+	fmt.Printf("\n")
+
+	appendNode(list, 3)	
+	list = removeAllNodesWithValue(list, 3)
 	list.printlist()
 }
 
@@ -57,4 +68,22 @@ func removeNode(head *node, val int) *node {
 	}
 	previous.next = remove.next
 	return head
+}
+func removeAllNodesWithValue(head *node, val int) *node {
+    var tmp *node
+    if head == nil {
+        return head
+    }
+    tmp = head
+    for tmp.next != nil {
+        if tmp.next.data == val {
+            tmp.next = tmp.next.next
+        } else {
+            tmp = tmp.next
+        }
+    }
+    if head.data == val {
+        return head.next
+    }
+    return head
 }
