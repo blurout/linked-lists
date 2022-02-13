@@ -44,6 +44,7 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * added appendNode()
 * added printList()
 * added removeNode()
+* added GO modules, testing packages
 ##### list.go:
 * simple linked list in GO
 ## ***More updates coming soon to this repository:*** ###  
@@ -53,6 +54,7 @@ Super basic linked list. My first time writing up a data structure from scratch 
 * comment fixes 
 * translate C files to GO
 * reverseKGroup.c (leetcode question)
+* GO package updates
 ## Current Languages Implemented:   
 * C Programming Language  
 * GO
