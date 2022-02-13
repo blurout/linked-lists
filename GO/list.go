@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
+	"linkedList/GO/printList"
 )
 
 type node struct {
-	val int
+	val  int
 	next *node
 }
 
@@ -20,13 +20,5 @@ func main() {
 	newNode1 := node{val: 3, next: nil}
 	myList.next.next = &newNode1
 
-	var tmp *node
-	tmp = &myList
-	for tmp != nil{
-		if tmp == nil {
-			break
-		}
-		fmt.Println(tmp.val)
-		tmp = tmp.next
-	}
+	printList.Plist()
 }
