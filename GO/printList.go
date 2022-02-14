@@ -1,15 +1,15 @@
-package printList
+package print
 
 import( 
 	"fmt"
 )
 
 type node struct {
-	val int
+	val  int
 	next *node
 }
 
-func Plist() (head *node) {
+func Plist(head *node) {
 	if head == nil {
 		fmt.Println("list empty")
 		return
@@ -19,5 +19,4 @@ func Plist() (head *node) {
 		fmt.Println(currentNode.val)
 		currentNode = currentNode.next
 	}
-	return
 }
