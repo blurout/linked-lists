@@ -173,7 +173,6 @@ node* reverseList(node* list) {
         next = current->next;
         current->next = previous;
         previous = current;
-        current = next;
     }
     list = previous;
     return list;
