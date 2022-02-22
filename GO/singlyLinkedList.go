@@ -14,18 +14,7 @@ func main() {
 	appendNode(list, 2)
 	appendNode(list, 3)
 	appendNode(list, 4)
-	appendNode(list, 5)
-	appendNode(list, 3)
-	appendNode(list, 3)
-	appendNode(list, 3)
-	appendNode(list, 3)
-
-	list = removeNode(list, 3)
-	list.printlist()
-	fmt.Printf("\n")
-
-	appendNode(list, 3)	
-	list = removeAllNodesWithValue(list, 3)
+	swap_nodes(list, 2)
 	list.printlist()
 }
 
@@ -69,7 +58,7 @@ func removeNode(head *node, val int) *node {
 	previous.next = remove.next
 	return head
 }
-func removeAllNodesWithValue(head *node, val int) *node {
+func removeAllNodesWithvalue(head *node, val int) *node {
     var tmp *node
     if head == nil {
         return head
@@ -85,5 +74,22 @@ func removeAllNodesWithValue(head *node, val int) *node {
     if head.data == val {
         return head.next
     }
+    return head
+}
+
+func swap_nodes(head *node, k int) *node {
+	firstswap := head
+    i := 0
+    for i < k-1 {
+        firstswap = firstswap.next
+        i++
+    }
+    
+    secondswap := head
+    for fast := firstswap.next; fast != nil; fast = fast.next {
+        secondswap = secondswap.next
+    }
+    
+    firstswap.data, secondswap.data = secondswap.data, firstswap.data
     return head
 }
