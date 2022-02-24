@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
+	"time"
 )
 
 type node struct {
@@ -11,10 +13,14 @@ type node struct {
 
 func main() {
 	list := appendNode(nil, 1)
-	appendNode(list, 2)
-	appendNode(list, 3)
-	appendNode(list, 4)
-	swap_nodes(list, 2)
+	appendNode(list, Randomint())
+	appendNode(list, Randomint())
+	appendNode(list, Randomint())
+	appendNode(list, Randomint())
+	appendNode(list, Randomint())
+	list.printlist()
+	fmt.Println("   ")
+	list = reverseKGroup(list, 4)
 	list.printlist()
 }
 
@@ -92,4 +98,55 @@ func swap_nodes(head *node, k int) *node {
     
     firstswap.data, secondswap.data = secondswap.data, firstswap.data
     return head
+}
+
+func reverseKGroup(head *node, k int) *node{
+    var groupPrev *node
+    var groupNext *node
+    var KthNode *node
+    var tmp *node
+    // nodes for reversing group
+    var curr *node
+    var prev *node
+    var placeHolder *node
+    
+    dummyNode := &node{data: 0}
+    dummyNode.next = head
+    groupPrev = dummyNode
+    
+    for true {
+        KthNode = getKthNode(groupPrev, k);
+        if KthNode == nil {
+            break;
+        }
+        groupNext = KthNode.next;
+        
+        // reversing group
+        prev = KthNode.next;
+        curr = groupPrev.next;
+        for curr != groupNext {
+            placeHolder = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = placeHolder;
+        }
+        
+        tmp = groupPrev.next;
+        groupPrev.next = KthNode;
+        groupPrev = tmp; 
+    }
+    return dummyNode.next;
+}
+func getKthNode(curr *node, k int) *node{
+    for curr != nil && k > 0 {
+        curr = curr.next;
+        k--;
+    }
+    return curr;
+}
+var randomnum int = int(time.Now().UnixMicro())
+
+func Randomint() int {
+	num := rand.Intn(10)
+	return num
 }
