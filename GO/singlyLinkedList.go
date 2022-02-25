@@ -147,6 +147,12 @@ func getKthNode(curr *node, k int) *node{
 var randomnum int = int(time.Now().UnixMicro())
 
 func Randomint() int {
-	num := rand.Intn(10)
-	return num
+	arr := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9,}
+    x := rand.NewSource(time.Now().UnixNano())
+    y := rand.New(x)
+    rand.Shuffle(len(arr), func(i, j int) {
+        arr[i], arr[j] = arr[j], arr[i]
+    })
+	return arr[y.Intn(10)]
 }
+
