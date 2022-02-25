@@ -156,3 +156,4 @@ func Randomint() int {
 	return arr[y.Intn(10)]
 }
 
+
