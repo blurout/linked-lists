@@ -20,7 +20,17 @@ func main() {
 	appendNode(list, Randomint())
 	list.printlist()
 	fmt.Println("   ")
+    
 	list = reverseKGroup(list, 4)
+
+    list2 := appendNode(nil, 1)
+	appendNode(list2, Randomint())
+	appendNode(list2, Randomint())
+	appendNode(list2, Randomint())
+	appendNode(list2, Randomint())
+	appendNode(list2, Randomint())
+
+    mergeTwoLists(list, list2)
 	list.printlist()
 }
 
@@ -156,4 +166,55 @@ func Randomint() int {
 	return arr[y.Intn(10)]
 }
 
+func mergeTwoLists(list1 *node, list2 *node) *node {
+    if list1 == nil && list2 != nil{
+        return list2
+    } else if list2 == nil && list1 != nil {
+        return list1
+    } else if list2 == nil && list1 == nil {
+        return nil
+    }
+    // traverse one of the lists and retrieve tail node
+    var tail *node
+    tail = list1
+    for tail.next != nil {
+        tail = tail.next
+    }
+    // make tail nodes next node the other lists head node
+    tail.next = list2
+    // sort the new list using bubble sort
+    return bubble_sort(list1)
+}
 
+func bubble_sort(list *node) *node {
+    if list == nil || list.next == nil {
+       return list
+    }
+    current := list
+    next := current.next;
+    p := list;
+    count := 0;
+    len := 0;
+    var buffer int
+    for p.next != nil {
+        p = p.next
+        len++
+    }
+    for count < len {
+        for i := 0; i < len; i++ {
+            if current.data > next.data {
+                buffer = current.data
+                current.data = next.data
+                next.data = buffer
+            }
+            if current.next != nil && next.next != nil {
+                current = current.next
+                next = next.next
+            }
+        }
+        current = list
+        next = list.next
+        count++
+    }
+    return list
+}
