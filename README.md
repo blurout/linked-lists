@@ -1,4 +1,4 @@
-# linkedList
+# linked lists
 Super basic linked list. My first time writing up a data structure from scratch (list.c).  
   
 ## Current Updates: 
